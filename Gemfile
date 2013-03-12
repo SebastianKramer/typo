@@ -56,4 +56,8 @@ group :development, :test do
   gem 'cucumber-rails-training-wheels'
   gem 'database_cleaner'
   gem 'capybara'
+
+  #gem 'guard-spork' #, '1.2.0'
+
+  gem 'spork', '0.9.0.rc8'
 end
