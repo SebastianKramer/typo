@@ -13,6 +13,11 @@
   </style>
 </head>
 <body>
+    <div>
+      <%= debug(params) if Rails.env.development? %>
+      <%= debug(session) if Rails.env.development? %>
+    </div>
+
   <div class='topbar'>
     <div class='topbar-inner'>
       <div class='container-fluid'>
@@ -70,5 +75,6 @@
   <footer>
     <%= link_to(this_blog.blog_name, this_blog.base_url) %> <%= _("is proudly powered by")%> Typo <%=h TYPO_VERSION %>
   </footer>
+
 </body>
 </html>
