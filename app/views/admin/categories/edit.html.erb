@@ -3,7 +3,7 @@
 <div>edit page1</div>
 
 <div class='left_form'>
-  <%= form_tag :action=>"update", :id => @category.id do %>
+  <%= form_tag :action=>"edit_update", :id => @category.id do %>
   <%= error_messages_for 'category' %>
   <div class='clearfix'>
     <label for="category_name"><%= _("Name")%></label>

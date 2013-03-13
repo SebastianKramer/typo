@@ -16,7 +16,7 @@ class Admin::CategoriesController < Admin::BaseController
     end
   end
 
-  def create
+  def edit_create
     #debugger
     @categories = Category.all
 
@@ -59,7 +59,7 @@ class Admin::CategoriesController < Admin::BaseController
     render 'edit' 
   end
 
-  def update
+  def edit_update
     @categories = Category.all
 
     if params[:id]
