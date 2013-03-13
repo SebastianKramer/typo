@@ -31,7 +31,7 @@ module WithinHelpers
 end
 World(WithinHelpers)
 
-Given /^the blog is set up$/ do
+Given /^the blog setup is done$/ do
   Blog.default.update_attributes!({:blog_name => 'Teh Blag',
                                    :base_url => 'http://localhost:3000'});
   Blog.default.save!

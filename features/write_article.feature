@@ -17,3 +17,11 @@ Feature: Write Articles
     Then I should see "Foobar"
     When I follow "Foobar"
     Then I should see "Lorem Ipsum"
+
+  Scenario: Successfully merge two articles
+    Given I am on the edit article page
+    When I fill in "Article ID" with "2"
+    And I press "Merge"
+    Then I will have a properly merged new article
+
+

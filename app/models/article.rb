@@ -120,6 +120,38 @@ class Article < Content
       eval(list_function.join('.'))
     end
 
+    def merge(a1_id, a2_id)
+      #debugger
+      a1 = Article.find_by_id(a1_id)
+      a2 = Article.find_by_id(a2_id)
+
+      result = Article.create(:title => a1.title,
+                                      :author => a1.author,
+                                      :body => a1.body + a2.body,
+                                      :user_id => a1.user_id,
+                                      :published => true,
+                                      :allow_comments => true)
+      comments_1 = Feedback.find_all_by_article_id(a1_id)
+      comments_2 = Feedback.find_all_by_article_id(a2_id)
+
+      unless comments_1.blank?
+        comments_1.each do |comment|
+          comment.article_id = result.id
+          comment.save
+        end
+      end
+
+      unless comments_2.blank?
+        comments_2.each do |comment|
+          comment.article_id = result.id
+          comment.save
+        end
+      end
+
+      Article.destroy(a1_id)
+      Article.destroy(a2_id)
+      result
+    end
   end
 
   def year_url
