@@ -4,20 +4,67 @@ class Admin::CategoriesController < Admin::BaseController
   def index 
     redirect_to :action => 'new' 
   end
+
+  def new
+    cat_controller
+  end
+
+  def edit
+    cat_controller
+  end
+
+  def cat_controller
+    #debugger
+    #categories/new - new_after
+    #{"action"=>"new", "id"=>nil, "controller"=>"admin/categories"}
+    
+    if params[:action] == 'new'
+      if request.post?
+        create_after
+      else
+        new_after
+      end
+    end
+
+
+    # if params[:id] == nil
+    #   new_after
+    # end
+    #categories/edit/1 - edit_after
+    #{"action"=>"edit", "id"=>"1", "controller"=>"admin/categories"}
+    if params[:action] == 'edit'
+      if request.post?
+        if params[:id] == nil
+          create_after
+        else
+          update_after
+        end
+      else
+        edit_after
+      end
+    end
+
+
+
+
+    #edit
+  end
   
-  def new 
+  def new_after 
     @category = Category.new
     @categories = Category.all
     respond_to do |format|
-      format.html { @category }#new_or_edit }
+      format.html do 
+        @category
+        render 'new' # dont know if this renders correctly
+      end#new_or_edit }
       format.js { 
         @category = Category.new
       }
     end
   end
 
-  def edit_create
-    #debugger
+  def create_after
     @categories = Category.all
 
     @category = Category.new 
@@ -47,7 +94,7 @@ class Admin::CategoriesController < Admin::BaseController
     end
   end
 
-  def edit 
+  def edit_after 
     #new_or_edit 
     @categories = Category.all
     if params[:id]
@@ -59,7 +106,7 @@ class Admin::CategoriesController < Admin::BaseController
     render 'edit' 
   end
 
-  def edit_update
+  def update_after
     @categories = Category.all
 
     if params[:id]
